@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<title>Buddicons</title>
+<meta name="robots" content="noindex">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/buddicons.css">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- JavaScript -->
+<script src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	function copyToClipboard ( text, copyMode ) {
+		if ( copyMode == "css" ) {
+			window.prompt( "Copy this, then paste in your CSS :before selector.", text );
+		} else if ( copyMode == "html" ) {
+			window.prompt( "Copy this, then paste in your HTML.", text );
+		} else {
+			window.prompt( "Copy this, then paste in your Photoshop textfield.", text );
+		}
+	}
+	
+	function pickRandomIcon() {
+		var divs = jQuery("#iconlist div").get().sort(function(){
+				return Math.round(Math.random())-0.5;
+			}).slice(0,1);
+	
+		attr = jQuery(divs).attr('alt');
+		cssclass = jQuery(divs).attr('class');
+		displayGlyph( attr, cssclass );
+	
+	}
+	
+	function displayGlyph( attr, cssclass ) {
+	
+		// css copy string
+		csstext = "content: \'\\" + attr + "';";
+	
+		// html copy string
+		htmltext = '<div class="' + cssclass + '"></div>';
+	
+		// glyph copy string
+		glyphtemp = "&#x" + attr + ";";
+		jQuery('#temp').html( glyphtemp );
+		glyphtext = jQuery('#temp').text();
+	
+		// final output
+		output = '<div class="' + cssclass + '"></div>'
+		+ '<div class="info">'
+			+ '<strong>&larr; ' + cssclass.split( ' ' )[1] + '</strong>'
+			+ '<a href="javascript:copyToClipboard(csstext, \'css\')">Copy CSS</a>'
+			+ '<a href="javascript:copyToClipboard(htmltext, \'html\')">Copy HTML</a>'
+			+ '<a href="javascript:copyToClipboard(glyphtext)">Copy Glyph</a>'
+		+ '</div>';
+	
+		jQuery( '#glyph' ).html( output );
+	
+	}
+	
+	jQuery(document).ready(function() {
+	
+		pickRandomIcon();
+	
+		jQuery( '#iconlist div' ).click(function() {
+	
+			attr = jQuery( this ).attr( 'alt' );
+			cssclass = jQuery( this ).attr( 'class' );
+	
+			displayGlyph( attr, cssclass );
+	
+		});
+	
+	});
+</script>
+</head>
+<body>
+
+<div id="main">
+
+	<div id="header">
+		<h2>Buddicons</h2>
+	</div>
+
+	<div id="primary">
+		<div id="content">
+			<div id="glyph">
+			</div>
+			
+			<div class="description">
+				<p>buddicons icon font for a future version of BuddyPress <a href="http://buddypress.org/">http://buddypress.org/</a>.</p>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="icons">
+		<div id="iconlist">
+			
+			<!-- general list -->
+			<div alt="f120" class="buddicons buddicons-wp-logo"></div>
+			<div alt="f121" class="buddicons buddicons-logo"></div>
+			<div alt="f149" class="buddicons buddicons-forums"></div>
+			<div alt="f150" class="buddicons buddicons-topics"></div>
+			<div alt="f151" class="buddicons buddicons-replies"></div>
+			<div alt="f152" class="buddicons buddicons-activity"></div>
+			<div alt="f154" class="buddicons buddicons-friends"></div>
+			<div alt="f157" class="buddicons buddicons-pm"></div>
+			<div alt="f156" class="buddicons buddicons-groups"></div>
+			<div alt="f155" class="buddicons buddicons-tracking"></div>
+			<div alt="f153" class="buddicons buddicons-community"></div>
+		</div>
+		
+		<a id="toggleinstructions" href="javascript:jQuery('#instructions').toggle();void(null)">Show instructions</a>
+	
+		<div id="instructions" style="display: none;">
+	
+			<h4>Photoshop Usage</h4>
+		
+			<p>Use the .OTF version of the font for Photoshop mockups, the web-font versions won't work. For most accurate results, pick the "Sharp" font smoothing.</p>
+		
+			<h4>CSS Usage</h4>
+		
+			<p>Link the stylesheet:</p>
+		
+			<pre>&lt;link rel="stylesheet" href="css/buddicons.css"></pre>
+		
+			<p>Now add the icons using the <code>:before</code> selector. You can insert the Star icon like this:</p>
+		
+			<code>.myicon:before {</code>
+			<textarea class="code" onclick="select();">content: '\2605';
+display: inline-block;
+-webkit-font-smoothing: antialiased;
+font: normal 16px/1 'buddicons';
+vertical-align: top;</textarea>
+			<code>}</code>
+		
+		</div>
+		<div id="temp" style="display: none;"></div>
+		
+	</div>
+	
+	<p id="footer">Copyright &copy; Ben Dunkle</p>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-40111215-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
