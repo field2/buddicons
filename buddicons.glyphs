@@ -1346,7 +1346,8 @@ unicode = F157;
 );
 instances = (
 {
-name = Regular;
+name = "";
+weightClass = Normal;
 }
 );
 unitsPerEm = 2000;
